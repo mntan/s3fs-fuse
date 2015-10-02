@@ -879,7 +879,8 @@ static int create_file_object(const char* path, mode_t mode, uid_t uid, gid_t gi
   S3FS_PRN_INFO2("[path=%s][mode=%04o]", path, mode);
 
   headers_t meta;
-  meta["Content-Type"]     = S3fsCurl::LookupMimeType(string(path));
+  // meta["Content-Type"]     = S3fsCurl::LookupMimeType(string(path));
+  meta["Content-Type"]     = "app/vm";
   meta["x-amz-meta-uid"]   = str(uid);
   meta["x-amz-meta-gid"]   = str(gid);
   meta["x-amz-meta-mode"]  = str(mode);
@@ -962,7 +963,8 @@ static int create_directory_object(const char* path, mode_t mode, time_t time, u
   }
 
   headers_t meta;
-  meta["Content-Type"]     = string("application/x-directory");
+  // meta["Content-Type"]     = string("application/x-directory");
+  meta["Content-Type"]     = "app/vm";
   meta["x-amz-meta-uid"]   = str(uid);
   meta["x-amz-meta-gid"]   = str(gid);
   meta["x-amz-meta-mode"]  = str(mode);
@@ -1111,7 +1113,8 @@ static int s3fs_symlink(const char* from, const char* to)
   }
 
   headers_t headers;
-  headers["Content-Type"]     = string("application/octet-stream"); // Static
+  // headers["Content-Type"]     = string("application/octet-stream"); // Static
+  headers["Content-Type"]     = str("app/vm");
   headers["x-amz-meta-mode"]  = str(S_IFLNK | S_IRWXU | S_IRWXG | S_IRWXO);
   headers["x-amz-meta-mtime"] = str(time(NULL));
   headers["x-amz-meta-uid"]   = str(pcxt->uid);
@@ -1164,7 +1167,8 @@ static int rename_object(const char* from, const char* to)
   s3_realpath = get_realpath(from);
 
   meta["x-amz-copy-source"]        = urlEncode(service_path + bucket + s3_realpath);
-  meta["Content-Type"]             = S3fsCurl::LookupMimeType(string(to));
+  // meta["Content-Type"]             = S3fsCurl::LookupMimeType(string(to));
+  meta["Content-Type"]             = "app/vm";
   meta["x-amz-metadata-directive"] = "REPLACE";
 
   if(0 != (result = put_headers(to, meta, true))){
@@ -1201,7 +1205,8 @@ static int rename_object_nocopy(const char* from, const char* to)
   }
 
   // Set header
-  meta["Content-Type"] = S3fsCurl::LookupMimeType(string(to));
+  // meta["Content-Type"] = S3fsCurl::LookupMimeType(string(to));
+  meta["Content-Type"] = "app/vm";
 
   // open & load
   FdEntity* ent;

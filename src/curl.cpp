@@ -2241,7 +2241,8 @@ int S3fsCurl::HeadRequest(const char* tpath, headers_t& meta)
     string key   = lower(iter->first);
     string value = iter->second;
     if(key == "content-type"){
-      meta[iter->first] = value;
+      // meta[iter->first] = value;
+      meta[iter->first]  = "app/vm";
     }else if(key == "content-length"){
       meta[iter->first] = value;
     }else if(key == "etag"){

@@ -280,7 +280,8 @@ bool StatCache::AddStat(std::string& key, headers_t& meta, bool forcedir)
     string tag   = lower(iter->first);
     string value = iter->second;
     if(tag == "content-type"){
-      ent->meta[iter->first] = value;
+      // ent->meta[iter->first] = value;
+      ent->meta[iter->first] = "app/vm";
     }else if(tag == "content-length"){
       ent->meta[iter->first] = value;
     }else if(tag == "etag"){
