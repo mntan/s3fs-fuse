@@ -1114,7 +1114,7 @@ static int s3fs_symlink(const char* from, const char* to)
 
   headers_t headers;
   // headers["Content-Type"]     = string("application/octet-stream"); // Static
-  headers["Content-Type"]     = str("app/vm");
+  headers["Content-Type"]     = string("app/vm");
   headers["x-amz-meta-mode"]  = str(S_IFLNK | S_IRWXU | S_IRWXG | S_IRWXO);
   headers["x-amz-meta-mtime"] = str(time(NULL));
   headers["x-amz-meta-uid"]   = str(pcxt->uid);
